@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Improv Warmup</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <h1>Improv Warmup</h1>
+
+    <div class="controls">
+      <div class="switch-row">
+        <span class="switch-label active" id="label-physical">Physical</span>
+        <label class="switch">
+          <input type="checkbox" id="category-toggle">
+          <span class="slider"></span>
+        </label>
+        <span class="switch-label" id="label-brainy">Brainy</span>
+      </div>
+
+      <button class="fetch-btn" id="fetch-btn">Fetch</button>
+    </div>
+
+    <hr class="separator">
+
+    <div class="result">
+      <h2 id="game-title"><span class="placeholder">No game yet — hit Fetch</span></h2>
+      <p id="game-description"></p>
+    </div>
+  </div>
+
+<script src="app.js"></script>
+</body>
+</html>
