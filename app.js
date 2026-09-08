@@ -43,5 +43,9 @@ fetchBtn.addEventListener('click', () => {
 updateLabels();
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
+  navigator.serviceWorker.register('sw.js').then((registration) => {
+    registration.update().catch(() => {
+      // no internet, or update check failed — ignore, app still works from cache
+    });
+  });
 }
