@@ -167,6 +167,14 @@ input:checked + .slider::before {
   font-size: 0.98rem;
 }
 
+.version-display {
+  position: fixed;
+  bottom: 8px;
+  right: 12px;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #1c1a17;

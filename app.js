@@ -30,17 +30,22 @@ function updateLabels() {
   labelBrainy.classList.toggle('active', isBrainy);
 }
 
-toggle.addEventListener('change', updateLabels);
-
-fetchBtn.addEventListener('click', () => {
+function getRandomExercise() {
   const category = toggle.checked ? 'brainy' : 'physical';
   const list = games[category];
   const game = list[Math.floor(Math.random() * list.length)];
   gameTitle.textContent = game.title;
   gameDescription.textContent = game.description;
+}
+
+toggle.addEventListener('change', updateLabels);
+
+fetchBtn.addEventListener('click', () => {
+  getRandomExercise()
 });
 
 updateLabels();
+getRandomExercise()
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').then((registration) => {
@@ -49,3 +54,26 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+
+// Version display
+function getSWVersion() {
+  return new Promise((resolve, reject) => {
+    if (!navigator.serviceWorker.controller) {
+      reject('No active service worker');
+      return;
+    }
+    const channel = new MessageChannel();
+    channel.port1.onmessage = (event) => resolve(event.data.version);
+    navigator.serviceWorker.controller.postMessage(
+      { type: 'GET_VERSION' },
+      [channel.port2]
+    );
+  });
+}
+
+// usage
+getSWVersion().then((version) => {
+  document.getElementById('version-display').textContent = `v${version}`;
+}).catch(() => {
+  document.getElementById('version-display').textContent = 'v?';
+});
